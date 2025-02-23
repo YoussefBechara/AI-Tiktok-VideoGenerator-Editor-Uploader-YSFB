@@ -6,7 +6,7 @@ Automated program for batch AI-generated TikTok content creation, editing, and u
 This project was completed by me in Feb2024 but decided to not make it public for business reasons.
 
 # Example output
-[Watch the Video]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtube.com/shorts/0OTVBfEXClY?feature=share))
+Watch the example.mp4 in the repository
 
 ## Features ✨
 - 🧠 AI-powered content generation (LLM models)
