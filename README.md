@@ -5,6 +5,12 @@ Automated program for batch AI-generated TikTok content creation, editing, and u
 ## Disclaimer: 
 This project was completed by me in Feb2024 but decided to not make it public for business reasons.
 
+# Example output
+<video width="320" height="240" controls>
+  <source src="video13 (online-video-cutter.com)(1).mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Features ✨
 - 🧠 AI-powered content generation (LLM models)
 - 🎙️ Text-to-Speech synthesis
