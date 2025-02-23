@@ -1,9 +1,9 @@
-# AI TikTok Video Generator/Editor/Uploader 🤖🎬📤
+# AI TikTok Video Generator/Editor/Uploader By Youssef Bechara 🤖🎬📤
 
 Automated program for batch AI-generated TikTok content creation, editing, and uploading
 
 ## Disclaimer: 
-This project was completed by me 1 year ago and decided to not make it public for business reasons.
+This project was completed by me in Feb2024 but decided to not make it public for business reasons.
 
 ## Features ✨
 - 🧠 AI-powered content generation (LLM models)
