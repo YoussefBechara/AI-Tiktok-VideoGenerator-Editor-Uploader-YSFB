@@ -1,0 +1,17 @@
+hugchat
+moviepy
+whisper_timestamped
+claude_api
+pydub
+subprocess
+numpy
+soundfile
+praw
+regex
+multiprocessing
+mega
+tkinter
+json
+google_auth_oauthlib
+google-api-client
+TTS
