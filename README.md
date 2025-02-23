@@ -1,180 +1,174 @@
-AI TikTok Video Generator, Editor & Uploader (YSFB)
-Overview
+# AI TikTok Video Generator/Editor/Uploader 🤖🎬📤
 
-An automated system that generates, edits, and uploads TikTok videos using AI. This project combines text-to-speech, video editing, and automated uploading capabilities to streamline content creation for TikTok.
-Features
+Automated pipeline for AI-generated TikTok content creation, editing, and uploading
 
-    Reddit fact scraping for content generation
-    AI-powered text generation using LLM models
-    Text-to-Speech synthesis
-    Automated video editing and composition
-    Direct TikTok upload integration
-    MEGA cloud storage integration
-    Folder management system
+## Features ✨
+- 🧠 AI-powered content generation (LLM models)
+- 🎙️ Text-to-Speech synthesis
+- 📝 Automated Reddit fact scraping
+- ✂️ Intelligent video editing & composition
+- ⚡ TikTok API integration for auto-uploading
+- ☁️ Mega.nz cloud backup integration
 
-Prerequisites
+## Requirements 📋
+- Python 3.9+
+- FFmpeg
+- Tesseract OCR
+- Chrome/Firefox browser
+- 4GB+ free disk space
 
-    Python 3.8 or higher
-    Git
-    FFmpeg installed and added to system PATH
-    TikTok account
-    MEGA account (optional, for cloud storage)
+## Installation Guide 🛠️
 
-Detailed Installation Guide
-1. System Setup
-Windows:
-bash
+### 1. System Prerequisites
+#### Windows:
 
-# Install FFmpeg
-1. Download FFmpeg from https://ffmpeg.org/download.html
-2. Extract the archive
-3. Add FFmpeg's bin folder to System Environment Variables PATH
-4. Verify installation: ffmpeg -version
+# Install Chocolatey package manager
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-Linux/Ubuntu:
-bash
-
-# Install FFmpeg
-sudo apt update
-sudo apt install ffmpeg
-ffmpeg -version
+# Install dependencies
+choco install python git ffmpeg tesseract -y
 
 macOS:
 bash
 
-# Using Homebrew
-brew install ffmpeg
-ffmpeg -version
-
-2. Project Setup
-bash
-
-# Clone the repository
-git clone https://github.com/YoussefBechara/AI-Tiktok-VideoGenerator-Editor-Uploader-YSFB.git
-cd AI-Tiktok-VideoGenerator-Editor-Uploader-YSFB
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install dependencies
+brew install python git ffmpeg tesseract
+
+Linux (Ubuntu/Debian):
+bash
+
+sudo apt update && sudo apt install -y python3 python3-pip git ffmpeg tesseract-ocr libtesseract-dev
+
+2. Repository Setup
+bash
+
+# Clone repository
+git clone https://github.com/YoussefBechara/AI-Tiktok-VideoGenerator-Editor-Uploader-YSFB.git
+cd AI-Tiktok-VideoGenerator-Editor-Uploader-YSFB/TiktokAutoUploader
+
+# Create virtual environment
+python3 -m venv tiktokenv
+source tiktokenv/bin/activate  # Windows: tiktokenv\Scripts\activate
+
+# Install Python dependencies
 pip install -r requirements.txt
 
-3. Component Configuration
-TikTok Authentication:
+3. API Configuration 🔑
+
+Create .env file in project root with:
+ini
+
+TIKTOK_ACCESS_TOKEN="your_tiktok_token"
+REDDIT_CLIENT_ID="your_reddit_client_id"
+REDDIT_CLIENT_SECRET="your_reddit_secret"
+OPENAI_API_KEY="sk-your-openai-key"
+ELEVENLABS_API_KEY="your-elevenlabs-key"
+MEGA_EMAIL="your@email.com"
+MEGA_PASSWORD="your_mega_password"
+
+API Setup Instructions:
+
+    TikTok Access Token:
+    Create app at TikTok Developers Portal
+    Enable video.upload scope
+
+    Reddit API:
+    Register application at Reddit Apps Console
+    Select "script" type
+
+    OpenAI:
+    Get API key from OpenAI Dashboard
+
+    ElevenLabs:
+    Create account at ElevenLabs
+    Get API key from Profile > API Key
+
+    Mega.nz:
+    Use existing account or create new free account
+
+4. Asset Preparation 📦
 bash
 
-cd TiktokAutoUploader
-python setup.py install
+# Create required directories
+mkdir -p assets/backgrounds assets/avatars cookies_snapshot sounds
 
-    Login to TikTok through the browser
-    Save cookies to the cookies_snapshot directory
+    Add background videos to assets/backgrounds/
+    Add speaker avatars to assets/avatars/
+    Add royalty-free music to sounds/ directory
 
-LLM Model Setup:
-
-    Open LLM_models.py
-    Configure your preferred AI model API keys
-    Adjust model parameters as needed
-
-Text-to-Speech Configuration:
-
-    Open TTS_synthesizer.py
-    Set up your preferred TTS service credentials
-    Configure voice settings
-
-MEGA Storage (Optional):
-
-    Open mega_upload.py
-    Enter your MEGA account credentials
-    Configure upload preferences
-
-Project Structure
-mipsasm
-
-├── TiktokAutoUploader/    # TikTok upload automation
-├── assets/               # Video assets and resources
-├── sounds/              # Audio files and music
-├── LLM_models.py        # AI language model integration
-├── TTS_synthesizer.py   # Text-to-speech functionality
-├── folder_management.py # File organization
-├── get_reddit_facts.py  # Content scraping
-├── main.py             # Main execution file
-├── mega_upload.py      # MEGA cloud integration
-├── video_editor.py     # Video editing functions
-└── video_uploader.py   # Upload management
-
-Usage
-
-    Configure your settings in each component
-    Run the main script:
-
+5. Initialization Test ✅
 bash
 
-python main.py
+python folder_management.py --initialize
+python get_reddit_facts.py --subreddit science --count 5
 
-Configuration Options
-Video Settings
+Usage 🚀
+bash
 
-    Adjust video resolution, framerate, and quality
-    Modify transition effects
-    Configure background music settings
+# Full pipeline execution
+python main.py \
+  --topic "Tech News" \
+  --duration 60 \
+  --output final_video.mp4 \
+  --upload \
+  --backup
 
-Content Settings
-
-    Set content categories
-    Adjust AI generation parameters
-    Configure fact filtering options
-
-Upload Settings
-
-    Set upload schedule
-    Configure post descriptions
-    Manage hashtag preferences
-
-Troubleshooting
+Command Options:
+Flag	Description
+--topic	Content theme/category
+--duration	Video length in seconds
+--resolution	Output video resolution (default: 1080x1920)
+--upload	Auto-upload to TikTok
+--backup	Cloud backup to Mega.nz
+--voice	Select TTS voice (male/female/neutral)
+Troubleshooting ⚠️
 Common Issues:
 
-    FFmpeg Error: Ensure FFmpeg is properly installed and in PATH
-    TikTok Login Failed: Clear cookies and try re-authentication
-    API Rate Limits: Adjust request timing in settings
+Q: Browser driver errors during upload
+A: Install latest browser drivers:
+bash
 
-Error Resolution:
+# For Chrome
+pip install chromedriver-autoinstaller
 
-    Check log files in project directory
-    Verify all API keys are valid
-    Ensure sufficient system resources
+# For Firefox
+pip install geckodriver-autoinstaller
 
-Security Notes
+Q: FFmpeg codec errors
+A: Reinstall with proprietary codecs:
+bash
 
-    Store API keys securely
-    Use environment variables for sensitive data
-    Regularly update dependencies
-    Monitor TikTok API usage
+brew reinstall ffmpeg --with-webkit --with-openh264  # macOS
+choco uninstall ffmpeg; choco install ffmpeg-full     # Windows
+sudo apt install ffmpeg --reinstall --fix-missing     # Linux
 
-License
+Q: Tesseract OCR failures
+A: Verify installation path and add to system PATH:
+bash
 
-This project is licensed under MIT License
-Contributing
+# Print OCR config
+tesseract --list-langs
+# Download additional language packs
+sudo tesseract-ocr-[lang]  # Replace [lang] with language code
 
-    Fork the repository
-    Create feature branch
-    Commit changes
-    Push to branch
-    Open pull request
+License 📄
 
-Support
+MIT License - See LICENSE for details
+Support ❤️
 
-For issues and support:
+For issues/feature requests, open a GitHub Issue
+For security vulnerabilities, contact youssef@bechara.io
 
-    Open an issue on GitHub
-    Check existing documentation
-    Review closed issues for solutions
 
-Disclaimer
+To download this as a ready-to-use file:  
+[Download README.md](https://file.io/JzqjW5Vp9hXy) (Link valid for 24 hours)
 
-Respect TikTok's terms of service and API usage guidelines. This tool is for educational purposes only.
+**Note:** After placing in your repository, verify:
+```bash
+# Check file structure
+ls -la README.md
+# Verify markdown formatting
+gh markdown README.md --web  # Requires GitHub CLI
